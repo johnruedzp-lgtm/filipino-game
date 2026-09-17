@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Operation Huling Baril V2</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/controls/PointerLockControls.js"></script>
+</head>
+
+<body>
+
+<div id="loading">
+    <div class="loadTitle">OPERATION: HULING BARIL</div>
+
+    <div class="loadBox">
+        <div id="loadBar"></div>
+    </div>
+
+    <div id="loadText">INITIALIZING...</div>
+</div>
+
+
+<div id="menu">
+
+    <div class="menuLogo">
+        <small>OPERATION</small>
+        <strong>HULING BARIL</strong>
+    </div>
+
+    <div class="tagline">
+        MANILA DISTRICT • NIGHT OPERATION
+    </div>
+
+    <button id="start">
+        DEPLOY
+    </button>
+
+    <div class="menuControls">
+        <div><b>WASD</b> MOVE</div>
+        <div><b>SHIFT</b> SPRINT</div>
+        <div><b>SPACE</b> JUMP</div>
+        <div><b>MOUSE</b> AIM</div>
+        <div><b>LMB</b> FIRE</div>
+        <div><b>R</b> RELOAD</div>
+    </div>
+
+</div>
+
+
+<div id="game">
+
+    <div class="top">
+
+        <div>
+            <div class="mission">OPERATION 01</div>
+            <div class="objective">ELIMINATE ALL HOSTILES</div>
+        </div>
+
+        <div class="enemyCounter">
+            HOSTILES:
+            <span id="enemyCount">12</span>
+        </div>
+
+    </div>
+
+
+    <div id="crosshair">
+
+        <span class="ct"></span>
+        <span class="cb"></span>
+        <span class="cl"></span>
+        <span class="cr"></span>
+        <span class="center"></span>
+
+    </div>
+
+
+    <div id="hitmarker">×</div>
+
+
+    <div id="damage"></div>
+
+
+    <div class="bottomLeft">
+
+        <div class="healthTitle">
+            HEALTH
+        </div>
+
+        <div class="healthBox">
+            <div id="health"></div>
+        </div>
+
+        <div id="healthNumber">
+            100
+        </div>
+
+    </div>
+
+
+    <div class="bottomRight">
+
+        <div class="weaponName">
+            M4A1
+        </div>
+
+        <div class="ammo">
+            <span id="ammo">30</span>
+            <small>/ 120</small>
+        </div>
+
+        <div id="reloadText">
+            R — RELOAD
+        </div>
+
+    </div>
+
+
+    <div id="mobile">
+
+        <div id="mobileJoystick">
+            <div id="joystickKnob"></div>
+        </div>
+
+        <button id="mobileFire">
+            FIRE
+        </button>
+
+        <button id="mobileJump">
+            ↑
+        </button>
+
+        <button id="mobileReload">
+            R
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="death">
+
+    <div class="deathTitle">
+        MISSION FAILED
+    </div>
+
+    <p>
+        Your squad has been eliminated.
+    </p>
+
+    <button id="restart">
+        REDEPLOY
+    </button>
+
+</div>
+
+
+<div id="errorScreen">
+
+    <h2>GAME ERROR</h2>
+
+    <p id="errorMessage"></p>
+
+    <button onclick="location.reload()">
+        RELOAD GAME
+    </button>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
