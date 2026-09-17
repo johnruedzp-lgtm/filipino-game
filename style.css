@@ -1,0 +1,743 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: #050708;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+
+    user-select: none;
+    touch-action: none;
+}
+
+
+canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    z-index: 0;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+#loading {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #202a31,
+            #050708 70%
+        );
+
+    letter-spacing: 3px;
+
+    transition:
+        opacity .5s;
+}
+
+
+.loadTitle {
+    font-size: clamp(
+        25px,
+        6vw,
+        65px
+    );
+
+    font-weight: 900;
+
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+
+.loadBox {
+    width: min(
+        500px,
+        75vw
+    );
+
+    height: 4px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    overflow: hidden;
+}
+
+
+#loadBar {
+    width: 0%;
+    height: 100%;
+
+    background: white;
+
+    transition:
+        width .15s;
+}
+
+
+#loadText {
+    margin-top: 15px;
+
+    font-size: 10px;
+
+    color: #888;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+#menu {
+    position: fixed;
+    inset: 0;
+
+    z-index: 500;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.8)
+        );
+}
+
+
+.menuLogo small {
+    display: block;
+
+    font-size: clamp(
+        16px,
+        3vw,
+        30px
+    );
+
+    letter-spacing: 10px;
+}
+
+
+.menuLogo strong {
+    display: block;
+
+    font-size: clamp(
+        35px,
+        8vw,
+        90px
+    );
+
+    font-weight: 900;
+
+    letter-spacing: 5px;
+}
+
+
+.tagline {
+    margin-top: 18px;
+
+    color: #8c9599;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+
+button {
+    margin-top: 45px;
+
+    padding: 16px 60px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.5);
+
+    background:
+        rgba(5,8,10,.8);
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    transition:
+        .2s;
+}
+
+
+button:hover {
+    background:
+        rgba(255,255,255,.15);
+
+    transform:
+        scale(1.05);
+}
+
+
+.menuControls {
+    position: absolute;
+
+    bottom: 25px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    color: #777;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+.menuControls b {
+    color: white;
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+#game {
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    pointer-events: none;
+}
+
+
+.top {
+    position: absolute;
+
+    top: 28px;
+    left: 30px;
+    right: 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+
+.mission {
+    font-size: 10px;
+
+    color: #9ba0a3;
+
+    letter-spacing: 3px;
+}
+
+
+.objective {
+    margin-top: 6px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+.enemyCounter {
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color: #999;
+}
+
+
+.enemyCounter span {
+    color: white;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   CROSSHAIR
+========================= */
+
+#crosshair {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 34px;
+    height: 34px;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+
+#crosshair span {
+    position: absolute;
+
+    background:
+        rgba(255,255,255,.9);
+}
+
+
+.ct,
+.cb {
+    width: 2px;
+    height: 9px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+}
+
+
+.ct {
+    top: 0;
+}
+
+
+.cb {
+    bottom: 0;
+}
+
+
+.cl,
+.cr {
+    width: 9px;
+    height: 2px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+}
+
+
+.cl {
+    left: 0;
+}
+
+
+.cr {
+    right: 0;
+}
+
+
+.center {
+    width: 3px;
+    height: 3px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius: 50%;
+}
+
+
+/* =========================
+   HIT MARKER
+========================= */
+
+#hitmarker {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    font-size: 40px;
+
+    opacity: 0;
+}
+
+
+/* =========================
+   DAMAGE
+========================= */
+
+#damage {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 40%,
+            rgba(160,0,0,.85)
+        );
+
+    opacity: 0;
+}
+
+
+/* =========================
+   HEALTH
+========================= */
+
+.bottomLeft {
+    position: absolute;
+
+    bottom: 30px;
+    left: 30px;
+
+    width: 220px;
+}
+
+
+.healthTitle {
+    font-size: 9px;
+
+    color: #999;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 7px;
+}
+
+
+.healthBox {
+    height: 8px;
+
+    width: 100%;
+
+    background:
+        rgba(255,255,255,.12);
+}
+
+
+#health {
+    height: 100%;
+
+    width: 100%;
+
+    background: white;
+
+    transition:
+        width .2s;
+}
+
+
+#healthNumber {
+    font-size: 20px;
+
+    margin-top: 5px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   AMMO
+========================= */
+
+.bottomRight {
+    position: absolute;
+
+    bottom: 28px;
+    right: 30px;
+
+    text-align: right;
+}
+
+
+.weaponName {
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    color: #999;
+}
+
+
+.ammo {
+    font-size: 58px;
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+
+.ammo small {
+    font-size: 18px;
+
+    color: #777;
+}
+
+
+#reloadText {
+    font-size: 9px;
+
+    color: #777;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   DEATH
+========================= */
+
+#death {
+    position: fixed;
+    inset: 0;
+
+    z-index: 700;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(80,0,0,.15),
+            rgba(0,0,0,.95)
+        );
+
+    text-align: center;
+}
+
+
+.deathTitle {
+    font-size: clamp(
+        40px,
+        9vw,
+        90px
+    );
+
+    font-weight: 900;
+
+    letter-spacing: 7px;
+}
+
+
+#death p {
+    color: #888;
+
+    margin-top: 15px;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+#errorScreen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 2000;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background: #050505;
+}
+
+
+#errorScreen h2 {
+    color: #ff5555;
+
+    letter-spacing: 4px;
+}
+
+
+#errorMessage {
+    max-width: 700px;
+
+    margin: 20px;
+
+    color: #aaa;
+
+    font-family: monospace;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+#mobile {
+    display: none;
+}
+
+
+@media(max-width: 800px) {
+
+    .bottomLeft {
+        width: 140px;
+
+        left: 15px;
+        bottom: 20px;
+    }
+
+    .bottomRight {
+        right: 15px;
+        bottom: 20px;
+    }
+
+    .ammo {
+        font-size: 42px;
+    }
+
+    .top {
+        left: 15px;
+        right: 15px;
+    }
+
+    #mobile {
+        display: block;
+
+        position: absolute;
+
+        inset: 0;
+    }
+
+
+    #mobileJoystick {
+        pointer-events: auto;
+
+        position: absolute;
+
+        left: 25px;
+        bottom: 90px;
+
+        width: 120px;
+        height: 120px;
+
+        border-radius: 50%;
+
+        border:
+            2px solid
+            rgba(255,255,255,.25);
+
+        background:
+            rgba(255,255,255,.04);
+    }
+
+
+    #joystickKnob {
+        position: absolute;
+
+        left: 35px;
+        top: 35px;
+
+        width: 50px;
+        height: 50px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,.25);
+    }
+
+
+    #mobile button {
+        pointer-events: auto;
+
+        position: absolute;
+
+        margin: 0;
+
+        padding: 0;
+
+        width: 65px;
+        height: 65px;
+
+        border-radius: 50%;
+
+        font-size: 12px;
+
+        letter-spacing: 1px;
+    }
+
+
+    #mobileFire {
+        right: 25px;
+        bottom: 95px;
+    }
+
+
+    #mobileJump {
+        right: 110px;
+        bottom: 180px;
+    }
+
+
+    #mobileReload {
+        right: 25px;
+        bottom: 180px;
+    }
+
+}
